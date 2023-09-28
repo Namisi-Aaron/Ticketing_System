@@ -8,9 +8,9 @@ app.use(morgan('combined'))
 app.use(bodyParser.json())
 app.use(cors())
 
-app.get('/', (req, res) =>{
+app.post('/login', (req, res) =>{
     res.send({
-        message: 'Homepage'
+        message: `Hello ${req.body.username}! Login successful`
     })
 })
 
