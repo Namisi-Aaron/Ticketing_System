@@ -35,7 +35,8 @@
         username: this.username,
         password: this.password
       })
-        console.log(response.data)
+        console.log(this.username)
+        console.log(this.password)
       }
     }
   };
