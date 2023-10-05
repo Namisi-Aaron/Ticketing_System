@@ -1,7 +1,7 @@
-<!-- Login.vue -->
+<!-- Register.vue -->
 <template>
     <div>
-        <hi>Login</hi>
+        <hi>Register</hi>
         <br>
         <input
           type="username"
@@ -15,32 +15,40 @@
           v-model="password"
           placeholder="Password"/>
         <br>
-        <button @click="login">Login</button>
+        <div class="error" v-html="error" />
+        <br>
+        <button @click="register">Register</button>
     </div>
   </template>
   
   <script>
   import authenticationService from '../services/authentication'
-
   export default {
     data() {
       return {
         username: '',
         password: '',
-      };
+        error: null
+      }
     },
     methods: {
-      async login () {
-      const response = await authenticationService.login({
-        username: this.username,
-        password: this.password
-      })
-        console.log(this.username)
-        console.log(this.password)
+      async register () {
+        try {
+          await authenticationService.register({
+            username: this.username,
+            password: this.password
+          })
+        } catch (error) {
+          console.log(error)
+          this.error = error.response.data.error
+        }
       }
     }
-  };
+  }
   </script>
   <style scoped>
+  .error {
+    color: red
+  }
 
 </style>
