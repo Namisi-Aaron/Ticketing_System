@@ -1,0 +1,31 @@
+body {
+    background: #fafafa;
+    color: #333333;
+  }
+
+.navbar {
+    background-color: #325c56;
+  }
+
+.content-section {
+    background: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.article-metadata {
+    padding-bottom: 1px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #e3e3e3
+}
+
+.article-title {
+    color: #444444;
+}
+
+main {
+    margin-top: 10px;
+}

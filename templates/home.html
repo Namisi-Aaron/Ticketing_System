@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block content %}
+    <!-- Tabs -->
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#">All</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">Primary</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">High-priority</a>
+        </li>
+        <!-- <li class="nav-item">
+        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+        </li> -->
+    </ul>
+    <div>
+        {% for ticket in tickets %}
+            <article class="media content-section">
+                <div class="media-body">
+                <div class="article-metadata">
+                    <a class="mr-2" href="#">{{ ticket.owner }}</a>
+                    <small class="text-muted">{{ ticket.created_dt }}</small>
+                </div>
+                <h2><a class="article-title" href="#">{{ ticket.category }}</a></h2>
+                <p class="article-content">{{ ticket.description }}</p>
+                </div>
+            </article>
+        {% endfor %}
+    </div>
+{% endblock %}
