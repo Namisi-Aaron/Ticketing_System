@@ -1,10 +1,7 @@
-from crypt import methods
-from flask import Flask, render_template, url_for, flash, redirect
-from forms import RegistrationForm, LoginForm
-
-app = Flask(__name__)
-
-app.config['SECRET_KEY'] = '2d23334fbbba726538a323b866fdbfd0'
+from flask import render_template, url_for, flash, redirect
+from app import app, db, bcrypt
+from app.models import User, Ticket
+from app.forms import RegistrationForm, LoginForm
 
 tickets = [
     {
@@ -43,8 +40,12 @@ def about():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+        db.session.add(user)
+        db.session.commit()
         flash('Account created for {}!'.format(form.username.data), 'success')
-        return redirect(url_for('home'))
+        return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -57,6 +58,3 @@ def login():
         else:
             flash('Login failed. Invalid credentials', 'danger')
     return render_template('login.html', title='Login', form=form)
-
-if __name__ == "__main__":
-    app.run(debug=True)
